@@ -77,3 +77,41 @@ Browser ──▶ Uvicorn (ASGI server) ──▶ FastAPI (ASGI app) ──▶ R
 * Works with servers like **Uvicorn** and frameworks like **FastAPI**, **Starlette**, and modern **Django**.
 
 ---
+
+```
+⚙️ The Flow: How a Request Moves Through
+Let's understand this line:
+
+Browser ──▶ Uvicorn (ASGI server) ──▶ FastAPI (ASGI app) ──▶ Response
+
+1. Browser Sends a Request
+A user opens your website or hits an API endpoint.
+
+The browser sends an HTTP request (GET, POST, etc.).
+
+2. Uvicorn (ASGI Server) Receives the Request
+Uvicorn is the ASGI server — it's like a middleman.
+
+It listens for incoming requests from clients (like a browser).
+
+Once a request comes in, Uvicorn parses the HTTP request.
+
+3. Uvicorn Passes the Request to the ASGI App (FastAPI)
+Uvicorn then calls your FastAPI app, passing the request in ASGI format (a dictionary with scope, receive, and send).
+
+FastAPI (which follows the ASGI standard) knows how to handle this kind of call.
+
+4. FastAPI Processes the Request
+FastAPI looks at the request: URL path, headers, body, etc.
+
+It matches the request to the correct route/function (like /login, /users, etc.).
+
+Then it generates a response (e.g., JSON data or HTML).
+
+5. Response is Sent Back to Uvicorn
+FastAPI returns the response back to Uvicorn.
+
+6. Uvicorn Sends the Response to the Browser
+Uvicorn takes that response and sends it back to the browser (or the client).
+
+```
